@@ -305,96 +305,107 @@ body {
 /* Menu Section Styling */
 .menu-section {
     padding: 60px 20px;
-    text-align: center;
-    background-color: #f8f4f0; /* Light background for contrast */
+    text-align: center; /* Center section title and other text */
+    background-color: #f8f4f0;
   }
   
   .section-title {
-    font-size: 2.8rem; /* Slightly larger title */
+    font-size: 2.8rem; /* Larger title */
     font-weight: bold;
-    color: #ff8c00; /* Accent color for the heading */
+    color: #ff8c00; /* Accent color */
     text-transform: uppercase;
     margin-bottom: 30px;
+    text-align: center; /* Keep the title centered */
   }
   
-  /* Horizontal Scroll */
-  .menu-scroll {
+  /* Grid Layout */
+  .menu-grid {
     display: flex;
-    gap: 20px; /* Larger gap for bigger items */
-    justify-content: center; /* Center items */
-    overflow-x: auto; /* Keep scroll functionality for overflow */
-    padding: 20px 0;
-    max-width: 100%; /* Allow it to fit within the container */
-    scrollbar-width: thin;
-    scrollbar-color: #ff8c00 #f8f4f0;
-  }
-  
-  .menu-scroll::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  .menu-scroll::-webkit-scrollbar-thumb {
-    background-color: #ff8c00;
-    border-radius: 4px;
-  }
-  
-  .menu-scroll::-webkit-scrollbar-track {
-    background-color: #f8f4f0;
+    gap: 20px;
+    justify-content: flex-start; /* Align boxes to the left */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
   }
   
   .menu-item {
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slightly larger shadow */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    text-align: center;
-    padding: 20px; /* More padding for larger content */
-    flex: 1 1 calc(30% - 20px); /* Maintain size to fit three items */
-    max-width: calc(30% - 20px); /* Ensure spacing */
-    box-sizing: border-box;
-    transform: translateX(-100px); /* Push the entire section slightly to the left */
-
+    text-align: center; /* Keep content inside boxes centered */
+    flex: 0 0 calc(30% - 20px); /* Adjust width to fit three items */
+    max-width: calc(30% - 20px);
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translate(-37.5px);
+  }
+  
+  .menu-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
   }
   
   .menu-image {
-    width: 100%;
-    height: 200px; /* Set a fixed height for larger images */
-    margin-bottom: 15px;
+    width: 70%; /* Slightly smaller width for zoomed-out effect */
+    height: 180px; /* Adjusted height to maintain proportions */
+
+    object-fit: cover;
     border-radius: 8px;
-    object-fit: cover; /* Ensure the image scales properly without distortion */
+    transition: transform 0.3s ease; /* Smooth zoom-out on hover or focus */
   }
+  
+  .menu-item:hover .menu-image {
+    transform: scale(1); /* Retain scale on hover */
+  }
+  
   
   .menu-title {
     font-size: 1.6rem; /* Larger text for titles */
     font-weight: bold;
     color: #333;
-    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  
+  .menu-description {
+    font-size: 1rem;
+    color: #666;
   }
   
   /* Responsive Design */
   @media (max-width: 768px) {
-
-    
+    .menu-item {
+      flex: 0 0 calc(45% - 20px); /* Adjust for tablets */
+      max-width: calc(45% - 20px);
+    }
   
     .menu-image {
-      height: 180px; /* Slightly smaller height for tablets */
+      height: 150px; /* Slightly smaller image height */
     }
   
     .menu-title {
-      font-size: 1.4rem; /* Adjust font size for smaller screens */
+      font-size: 1.4rem;
+    }
+  
+    .menu-description {
+      font-size: 0.9rem;
     }
   }
   
   @media (max-width: 480px) {
-
-    
+    .menu-item {
+      flex: 0 0 calc(100% - 20px); /* Full width for mobile */
+      max-width: calc(100% - 20px);
+    }
   
     .menu-image {
-      height: 160px; /* Smaller height for very small screens */
+      height: 120px; /* Smaller image height for mobile */
     }
   
     .menu-title {
-      font-size: 1.2rem; /* Smaller font size for very small screens */
+      font-size: 1.2rem;
+    }
+  
+    .menu-description {
+      font-size: 0.8rem;
     }
   }
   
@@ -613,9 +624,8 @@ body {
   }
   
   
-  
-  /* ===== Renovated Location Section ===== */
-  .location-section {
+/* Renovated Location Section */
+.location-section {
     background-color: rgba(255, 254, 252, 1);
     padding: 60px 20px;
     color: rgba(160, 174, 171, 1);
@@ -643,15 +653,14 @@ body {
   }
   
   .location-info p {
-    font-size: 1.6rem; /* Increased font size for better readability */
-    line-height: 1.8; /* Improved line height for better spacing */
-    letter-spacing: 1px; /* Matches the font style of titles */
-    font-weight: 500; /* Slightly bold text for emphasis */
-    color: rgba(160, 174, 171, 1); /* Keeps the same text color consistent */
+    font-size: 1.6rem;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: rgba(160, 174, 171, 1);
     margin-bottom: 15px;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1); /* Adds a subtle text shadow */
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
   }
-  
   
   .location-info .btn {
     display: inline-block;
@@ -672,35 +681,33 @@ body {
   
   .map-wrapper {
     flex: 1 1 60%;
-    height: 100%; /* Ensures full height for the map container */
-    padding: 0; /* Removes any padding */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
-    border-radius: 8px; /* Smooth corners */
-    overflow: hidden; /* Keeps the map neatly within the rounded corners */
+    height: 450px; /* Taller height for the map container */
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
   }
   
   .location-section iframe {
     width: 100%;
     height: 100%;
-    border: none; /* Removes border for a cleaner look */
+    border: none;
   }
   
   .map-container {
     flex: 1 1 60%;
-    text-align: center; /* Center the map title above the map */
+    text-align: center;
   }
   
   .map-title {
     font-size: 2rem;
     font-weight: 900;
-    color: #15a84f; /* Matches the accent color */
+    color: #15a84f;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2); /* Consistent text shadow */
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
   }
-  
-  
   
   /* Responsive Adjustments */
   @media (max-width: 768px) {
@@ -711,33 +718,38 @@ body {
   
     .location-info {
       flex: 1 1 100%;
-      padding: 10px 0; /* Add slight padding for better spacing */
+      padding: 10px 0;
     }
   
     .map-wrapper {
       flex: 1 1 100%;
+      height: 400px; /* Adjust height for smaller screens */
     }
   }
   
   @media (max-width: 480px) {
     .location-section {
-      padding: 40px 15px; /* Reduce overall padding */
+      padding: 40px 15px;
     }
   
     .location-info .section-title {
-      font-size: 2rem; /* Match heading size to About Us section */
-      letter-spacing: 1.5px; /* Adjust letter spacing for readability */
+      font-size: 2rem;
+      letter-spacing: 1.5px;
     }
   
     .location-info p {
-      font-size: 1.2rem; /* Match paragraph size to About Us */
-      line-height: 1.6; /* Ensure adequate spacing between lines */
-      letter-spacing: 1px; /* Consistent letter spacing */
+      font-size: 1.2rem;
+      line-height: 1.6;
+      letter-spacing: 1px;
     }
   
     .location-info .btn {
-      font-size: 1.0rem; /* Slightly smaller button text */
-      padding: 8px 16px; /* Adjust padding for smaller screens */
+      font-size: 1.0rem;
+      padding: 8px 16px;
+    }
+  
+    .map-wrapper {
+      height: 300px; /* Smaller height for mobile screens */
     }
   }
   
