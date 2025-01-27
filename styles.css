@@ -621,7 +621,7 @@ footer .social-icons a:hover {
   }
 
   .gallery-slider {
-    height: 200px; /* Smaller height for phones */
+    height: 190px; /* Smaller height for phones */
   }
 
   .gallery-slider img {
