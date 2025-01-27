@@ -1,871 +1,735 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@700&family=Patrick+Hand:wght@400&display=swap');
 
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Theme Colors */
+:root {
+    --primary-yellow: #FEEA2B;
+    --secondary-green: #00A64F;
+    --neutral-beige: #FCF7E1;
+    --dark-black: #000000;
+    --white: #FFFFFF;
+}
+
+/* Fonts */
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #15a84f; /* Matches the header background color */
-    color: #15a84f;
-  }
-  
-  /* ===== Container Styling ===== */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* ===== Header Styling ===== */
-  header {
-    background-color: #15a84f;
-    padding: 20px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  header:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-/* Logo Styling */
+    font-family: 'Patrick Hand', cursive; /* Playful, handwritten style for body */
+    background-color: var(--neutral-beige); /* Soft beige background */
+    color: var(--dark-black); /* Default text color */
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Header Styling */
+.main-header {
+  position: fixed;
+  width: 100%;
+  background-color: var(--primary-yellow);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* Logo Section */
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between image and text */
-    position: relative; /* Ensure the logo can overflow its container */
+  height: 60px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.cafe-name {
+  font-size: 2.5rem;
+  font-family: 'Baloo Bhaina 2', cursive; /* Bold, rounded, playful font */
+  font-weight: 700;
+  color: var(--dark-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Navigation Menu */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-family: 'Baloo Bhaina 2', cursive; /* Bold, rounded, playful font for links */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--dark-black);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: var(--secondary-green);
+  text-decoration: underline;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none; /* Hidden on larger screens */
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  margin-right: 20px; /* Adjust away from the edge */
+}
+
+.hamburger .line {
+  width: 30px;
+  height: 3px;
+  background-color: var(--dark-black);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hamburger {
+      display: flex;
   }
-  
-  .logo-image {
-    width: 80px; /* Increase the size of the logo */
-    height: 70px; /* Ensure it matches the width */
-    border-radius: 0%; /* Keep the logo circular */
-    object-fit: cover; /* Maintain aspect ratio */
-    position: absolute;
-    top: -15px; /* Adjust vertical position to make it fit without increasing navbar height */
-  }
-  
-  .logo span {
-    font-size: 2rem;
-    font-weight: 900;
-    color: rgba(255, 254, 252, 1);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
-    margin-left: 90px; /* Adjust text placement to accommodate larger logo */
-  }
-  
-  /* Ensure logo aligns properly in nav */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  
-  
-  
+
   .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    align-items: center;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: var(--primary-yellow);
+      height: 100vh;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: 999;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   }
-  
-  .nav-links li {
-    display: inline-block;
+
+  .nav-links.active {
+      transform: translateY(0);
+      opacity: 1;
   }
-  
+
   .nav-links a {
-    text-decoration: none;
-    color: rgba(255, 254, 252, 1);
-    font-weight: 900;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    position: relative;
-    transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .nav-links a::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
-    z-index: -1;
-  }
-  
-  .nav-links a:hover {
-    color: rgba(160, 174, 171, 1);
-    transform: scale(1.1);
-    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
-  }
-  
-  .toggle-menu {
-    display: none;
-    font-size: 1.8rem;
-    color: rgba(255, 254, 252, 1);
-    cursor: pointer;
-  }
-  
-  /* ===== For Tablet Screens (Max Width: 768px) ===== */
-  @media (max-width: 768px) {
-    .toggle-menu {
-      display: block;
-      font-size: 1.8rem;
-      color: rgba(255, 254, 252, 1);
-      cursor: pointer;
-    }
-  
-    .nav-links {
-      position: absolute;
-      top: 70px; /* Adjusted to make the menu higher */
-      right: 0px; /* Shifted to the right */
-      flex-direction: column;
-      gap: 15px; /* Space between items */
-      width: 200px; /* Dropdown width */
-      padding: 20px; /* Padding inside the dropdown */
-      background-color: #15a84f; /* Dropdown background */
-      border-radius: 0px; /* Round corners at the bottom */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Shadow for depth */
-      display: none; /* Hidden by default */
-      z-index: 1000; /* Ensure it's above other elements */
-      opacity: 0; /* Invisible initially */
-      transform: translateY(-50px); /* Start even higher above its final position */
-      transition: opacity 0.3s ease, transform 0.4s ease; /* Smooth dropdown transition */
-    }
-  
-    .nav-links.show {
-      display: flex; /* Make the dropdown menu visible */
-      opacity: 1; /* Fully visible */
-      transform: translateY(0); /* Slide to its final position */
-    }
-  
-    .nav-links a {
-      font-size: 1rem;
-      text-align: center;
-      color: rgba(255, 254, 252, 1);
-      padding: 10px 0;
-      display: inline-block;
-      border-bottom: 1px solid rgba(255, 254, 252, 0.2);
-      transition: background-color 0.3s ease; /* Smooth hover effect */
-    }
-  
-    .nav-links a:hover {
-      background-color: rgba(160, 174, 171, 0.3); /* Highlight on hover */
-    }
-  
-    .nav-links a:last-child {
-      border-bottom: none; /* Remove divider for the last item */
-    }
-  }
-  
-  /* Smooth Scroll Offset */
-  html {
-    scroll-padding-top: 100px; /* Offset for fixed header */
-    scroll-behavior: smooth; /* Smooth scrolling */
-  }
-  
-  
-  
-  /* ===== Hero Section Styling ===== */
-  .hero {
-    position: relative;
-    height: 80vh; /* Adjusted height to make it shorter */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  /* Video Background Styling */
-  .hero .slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden; /* Ensure video stays within the container */
-  }
-  
-  .hero .slideshow video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire area */
-    filter: blur(3px); /* Apply blur effect if needed */
-  }
-  
-  /* Overlay for Shadow Effect */
-  .hero .slideshow::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent shadow overlay */
-    z-index: 1; /* Above video but below content */
-  }
-  
-  /* Hero Title Styling */
-  .hero-title {
-    font-size: 5rem;
-    font-weight: 900;
-    color: rgba(255, 254, 252, 1);
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    position: relative;
-    opacity: 1; /* Static visibility */
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5); /* Stronger shadow for text */
-    z-index: 2; /* Ensure it appears above everything else */
-  }
-  
-
-  
-  .hero-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: rgb(255, 255, 255); /* Same as the title color */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background-color: transparent;
-    border: 2px solid rgb(255, 255, 255); /* Border matches title color */
-    border-radius: 5px;
-    text-decoration: none; /* Removes underline */
-    transition: all 0.3s ease; /* Smooth hover transition */
-  }
-  
-  .hero-button:hover {
-    background-color: #15a84f;
-    color: #fff; /* White text on hover */
-    cursor: pointer;
-  }
-  
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-  
-    .hero-button {
-      font-size: 1.2rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-title {
       font-size: 1.5rem;
-    }
-  
-    .hero-button {
-      font-size: 1rem;
-      padding: 12px 25px;
-    }
+      font-family: 'Baloo Bhaina 2', cursive; /* Matching playful font for mobile */
   }
-  
-  /* ===== Responsive Design for Hero Section ===== */
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 3rem;
-      letter-spacing: 3px;
-    }
-  
-    .hero {
-      height: 70vh; /* Further reduced height for tablets */
-    }
+}
+/* Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 50vh; /* Reduced height for a shorter banner */
+  overflow: hidden;
+  display: flex; /* Ensures content alignment */
+  align-items: center; /* Center vertically */
+}
+
+/* Hero Image */
+.hero-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Cover the container completely */
+  background-position: center; /* Center the focus of the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  margin-top: 120px; /* Removed to prevent gaps */
+}
+
+/* Overlay for Text */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 166, 79, 0.5); /* Semi-transparent overlay in green */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hero Title */
+.hero-title {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 5rem; /* Adjusted font size to balance zoom-out */
+  font-weight: 700;
+  color: var(--white); /* White text for contrast */
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+      height: 40vh; /* Further reduced height for smaller screens */
   }
-  
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-    }
-  
-    .hero {
-      height: 60vh; /* Further reduced height for small screens */
-    }
+
+  .hero-image {
+      background-size: cover; /* Ensure the image fills the container */
+      background-position: center; /* Re-center for smaller screens */
   }
-  
-  
-  
+
+  .hero-title {
+      font-size: 3.5rem; /* Smaller font size for mobile screens */
+  }
+}
 
 
 
-
-/* Menu Section Styling */
-.menu-section {
-    padding: 60px 20px;
-    text-align: center; /* Center section title and other text */
-    background-color: #f8f4f0;
-  }
-  
-  .section-title {
-    font-size: 2.8rem; /* Larger title */
-    font-weight: bold;
-    color: #ff8c00; /* Accent color */
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    text-align: center; /* Keep the title centered */
-  }
-  
-  /* Grid Layout */
-  .menu-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start; /* Align boxes to the left */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  }
-  
-  .menu-item {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    text-align: center; /* Keep content inside boxes centered */
-    flex: 0 0 calc(30% - 20px); /* Adjust width to fit three items */
-    max-width: calc(30% - 20px);
-    padding: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: translate(-37.5px);
-  }
-  
-  .menu-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
-  }
-  
-  .menu-image {
-    width: 70%; /* Slightly smaller width for zoomed-out effect */
-    height: 180px; /* Adjusted height to maintain proportions */
-
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease; /* Smooth zoom-out on hover or focus */
-  }
-  
-  .menu-item:hover .menu-image {
-    transform: scale(1); /* Retain scale on hover */
-  }
-  
-  
-  .menu-title {
-    font-size: 1.6rem; /* Larger text for titles */
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .menu-description {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .menu-item {
-      flex: 0 0 calc(45% - 20px); /* Adjust for tablets */
-      max-width: calc(45% - 20px);
-    }
-  
-    .menu-image {
-      height: 150px; /* Slightly smaller image height */
-    }
-  
-    .menu-title {
-      font-size: 1.4rem;
-    }
-  
-    .menu-description {
-      font-size: 0.9rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .menu-item {
-      flex: 0 0 calc(100% - 20px); /* Full width for mobile */
-      max-width: calc(100% - 20px);
-    }
-  
-    .menu-image {
-      height: 120px; /* Smaller image height for mobile */
-    }
-  
-    .menu-title {
-      font-size: 1.2rem;
-    }
-  
-    .menu-description {
-      font-size: 0.8rem;
-    }
-  }
-  
-  
-  
-  /* ===== About Us Section Styling ===== */
-  /* ===== About Us Section Styling ===== */
-  .about-us {
-    background-color: rgba(255, 254, 252, 1); /* Light background for contrast */
-    color: rgba(160, 174, 171, 1); /* Matches the text color of the theme */
-    padding: 60px 20px; /* Ample spacing for visual appeal */
+/* Footer */
+footer {
+    background-color: var(--primary-yellow);
+    color: var(--dark-black);
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .about-us h2 {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #15a84f; /* Accent color for the heading */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    position: relative;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2); /* Shadow effect for text */
-    opacity: 0; /* Initially hidden */
-    transform: translateY(50px); /* Start slightly below */
-    transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth fade and slide */
-  }
-  
-  .about-us p {
+    padding: 2rem 1rem;
+}
+
+footer .social-icons a {
+    color: var(--dark-black);
     font-size: 1.5rem;
-    line-height: 1.8;
-    margin: 10px 0;
-    position: relative;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
-    opacity: 0; /* Initially hidden */
-    transform: translateY(50px); /* Start slightly below */
-    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s; /* Delayed reveal for paragraphs */
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: var(--secondary-green);
+}
+
+/* Who We Are Section */
+.who-we-are {
+  padding: 4rem 2rem;
+  background-color: var(--secondary-green); /* 00A64F */
+  color: var(--white); /* White text for better visibility */
+}
+
+.who-we-are .container {
+  max-width: 900px; /* Default smaller container */
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Slightly smaller on laptops (1024px - 1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .who-we-are .container {
+    max-width: 800px; /* Reduced size on laptops */
   }
-  
-  .about-us.visible h2 {
-    opacity: 1; /* Fully visible */
-    transform: translateY(0); /* Reset position */
+}
+
+.who-we-are-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.text-content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.text-content h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful font for the headline */
+  font-size: 3rem; /* Significantly increased font size */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px; /* Slightly more spacing */
+  color: var(--primary-yellow); /* FEEA2B */
+}
+
+.text-content p {
+  font-family: 'Patrick Hand', cursive; /* Patrick Hand for body text */
+  font-size: 1.5rem; /* Larger for readability */
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.text-content strong {
+  color: var(--primary-yellow); /* Highlight important text with yellow */
+  font-weight: 600;
+}
+
+.image-group {
+  display: flex;
+  flex-direction: column; /* Stack images vertically */
+  gap: 1rem; /* Add spacing between images */
+  flex: 1;
+}
+
+.image-content {
+  display: flex;
+  justify-content: center;
+}
+
+.who-we-are-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .who-we-are .container {
+    max-width: 100%; /* Ensure it adapts fully on smaller screens */
+    padding: 0 1rem; /* Add some padding for mobile */
   }
-  
-  .about-us.visible p {
-    opacity: 1; /* Fully visible */
-    transform: translateY(0); /* Reset position */
-  }
-  
-  /* ===== Responsive Design ===== */
-  
-  /* Tablets */
-  @media (max-width: 768px) {
-    .about-us {
-      padding: 60px 20px; /* Increase padding for a more spacious look */
-    }
-  
-    .about-us h2 {
-      font-size: 2rem; /* Larger heading for emphasis */
-      letter-spacing: 1.8px; /* Slightly more spacing for better visual balance */
-    }
-  
-    .about-us p {
-      font-size: 1.2rem; /* Increase paragraph font size */
-      line-height: 1.8; /* Better spacing between lines */
-    }
-  }
-  
-  /* Mobile Phones */
-  @media (max-width: 480px) {
-    .about-us {
-      padding: 50px 20px; /* Further increased padding */
-    }
-  
-    .about-us h2 {
-      font-size: 2rem; /* Larger font size for better readability */
-      letter-spacing: 1.5px; /* Maintain good spacing */
-    }
-  
-    .about-us p {
-      font-size: 1.2rem; /* Slightly larger font size for clarity */
-      line-height: 1.6; /* Maintain readable line spacing */
-    }
-  }
-  
-  
-  
-  /* ===== Opening Hours Section Styling ===== */
-  .opening-hours {
-    background: linear-gradient(
-        rgba(0, 0, 0, 0.5), 
-        rgba(0, 0, 0, 0.5)
-      ), 
-      url('hours.png') no-repeat center center / cover; /* Full-size background image with overlay */
-    padding: 80px 20px; /* Ample padding */
-    color: rgba(255, 254, 252, 1); /* White text for contrast */
-    text-align: left; /* Align contents to the left */
-    position: relative;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Adds shadow effect as a divider */
-    overflow: hidden; /* Prevent content overflow */
-  }
-  
-  
-  /* Section Title */
-  .section-title {
-    font-size: 3rem; /* Smaller font size for better fit */
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255, 254, 252, 1); /* White */
-    margin-bottom: 20px;
-    position: relative;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2); /* Text shadow */
-    opacity: 0;
-    transform: translateY(50px); /* Start below */
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    text-align: left; /* Align title to the left */
-  }
-  
-  /* Hours Wrapper */
-  .hours-wrapper {
-    display: flex;
+
+  .who-we-are-content {
     flex-direction: column;
-    gap: 15px;
-    align-items: flex-start; /* Align items to the left */
-    opacity: 0;
-    transform: translateY(50px); /* Start below */
-    transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; /* Staggered effect */
+    text-align: center;
   }
-  
-  /* Individual Day & Time Styling */
-  .hours-item {
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
-    width: 100%; /* Full width for responsiveness */
-    max-width: 500px;
-    text-align: left; /* Align text to the left */
+
+  .text-content h2 {
+    font-size: 4rem; /* Larger headline for mobile */
   }
-  
-  /* Font Styles for Day and Time */
-  .day-range,
-  .time-range {
-    font-size: 1.6rem; /* Smaller font size for better fit */
-    font-weight: 900; /* Bold text */
-    text-transform: uppercase; /* Uppercase text */
-    letter-spacing: 1.2px; /* Reduced letter spacing */
-    position: relative;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    color: rgba(255, 254, 252, 1); /* White text */
-    margin: 5px 0;
+
+  .text-content p {
+    font-size: 1.3rem; /* Larger body text for mobile */
   }
-  
-  /* ===== Responsive Design ===== */
-  
-  /* Tablets (768px and below) */
-  @media (max-width: 768px) {
-    .opening-hours {
-      padding: 50px 15px; /* Adjust padding for smaller screens */
-    }
-  
-    .section-title {
-      font-size: 1.8rem; /* Adjusted for smaller screens */
-      letter-spacing: 1.2px; /* Slightly reduced spacing */
-      margin-bottom: 15px; /* Adjust margin to avoid crowding */
-    }
-  
-    .hours-item {
-      padding: 10px 15px; /* Reduce padding */
-    }
-  
-    .day-range,
-    .time-range {
-      font-size: 1.4rem; /* Smaller font */
-      letter-spacing: 1px; /* Adjust letter spacing */
-    }
+
+  .image-group {
+    gap: 0.5rem; /* Reduce spacing between images on smaller screens */
   }
-  
-  /* Mobile Phones (480px and below) */
-  @media (max-width: 480px) {
-    .opening-hours {
-      padding: 40px 10px; /* Further reduce padding */
-    }
-  
-    .section-title {
-      font-size: 1.6rem; /* Further reduced font size for mobile */
-      letter-spacing: 1px; /* Reduce letter spacing */
-      margin-bottom: 10px; /* Compact margin */
-    }
-  
-    .hours-item {
-      padding: 10px; /* Compact padding */
-    }
-  
-    .day-range,
-    .time-range {
-      font-size: 1.2rem; /* Smaller font size for better readability */
-      letter-spacing: 0.8px; /* Reduced letter spacing */
-    }
+}
+
+@media (max-width: 480px) {
+  .text-content h2 {
+    font-size: 2.5rem; /* Large headline on very small screens */
   }
-  
-  
-  /* ===== Section Divider Styling ===== */
-  .section-divider {
-    width: 80%; /* Adjust width to fit the content area */
-    height: 4px; /* Thin line for subtlety */
-    background: linear-gradient(
-      to right,
-      #15a84f, /* Theme accent color */
-      rgba(160, 174, 171, 0.5), /* Lighter accent */
-      #15a84f /* Theme accent color */
-    ); /* Gradient for a polished look */
-    border-radius: 4px; /* Smooth rounded edges */
+
+  .text-content p {
+    font-size: 1.2rem; /* Maintain readability on very small screens */
   }
-  
-  
-/* Renovated Location Section */
+}
+
+
+
+/* Menu Section */
+.menu-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: var(--primary-yellow); /* FEEA2B */
+  color: var(--dark-black); /* Black text for contrast */
+}
+
+.menu-section .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.menu-section h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 4rem; /* Larger font size for headline */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--dark-black); /* Black for emphasis */
+}
+
+.menu-section p {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Slightly larger for readability */
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--dark-black); /* Black text for contrast */
+}
+
+.menu-button {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Larger font for buttons */
+  font-weight: bold;
+  color: var(--primary-yellow); /* Yellow text for button */
+  background-color: var(--dark-black); /* Black button background */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.menu-button:hover {
+  background-color: var(--secondary-green); /* Green on hover */
+  color: var(--white); /* White text on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-section h2 {
+    font-size: 3rem; /* Adjust headline size for mobile */
+  }
+
+  .menu-section p {
+    font-size: 1.3rem; /* Adjust paragraph size for mobile */
+  }
+
+  .menu-button {
+    font-size: 1.2rem; /* Adjust button size for mobile */
+    padding: 1rem 2rem;
+  }
+}
+
+/* Opening Hours Section */
+.opening-hours {
+  padding: 4rem 2rem;
+  background-color: var(--secondary-green); /* 00A64F */
+  color: var(--white); /* White text for contrast */
+  text-align: center;
+}
+
+.opening-hours .container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.opening-hours h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 4rem; /* Larger headline size */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px; /* Slightly more spacing */
+  color: var(--primary-yellow); /* Highlight with yellow */
+}
+
+.opening-hours p {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Larger font for readability */
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--white); /* White text for visibility */
+  text-align: center;
+}
+
+.hours-table {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+  color: var(--white); /* White text */
+  text-align: center;
+}
+
+.hours-row:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hours {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 2rem; /* Increased font size for emphasis */
+  font-weight: bold; /* Bold text for clarity */
+  text-align: center;
+  color: var(--primary-yellow); /* Highlight 24/7 text with yellow */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hours-row {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .hours {
+    font-size: 1.6rem; /* Slightly smaller font for mobile */
+  }
+
+  .opening-hours p {
+    font-size: 1.3rem; /* Adjust paragraph size for mobile */
+  }
+
+  .opening-hours h2 {
+    font-size: 3rem; /* Adjust headline size for mobile */
+  }
+}
+
+
+/* Location Section */
 .location-section {
-    background-color: rgba(255, 254, 252, 1);
-    padding: 60px 20px;
-    color: rgba(160, 174, 171, 1);
-    text-align: left;
+  padding: 4rem 2rem;
+  background-color: var(--primary-yellow); /* FEEA2B */
+  color: var(--dark-black); /* Black text for contrast */
+  text-align: center;
+}
+
+.location-section .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.location-section h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 4rem; /* Larger font size for emphasis */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--dark-black);
+}
+
+.location-section p {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Slightly larger for readability */
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--dark-black);
+}
+
+.map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.google-map {
+  width: 100%;
+  height: 400px;
+  border: none;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .location-section h2 {
+    font-size: 3rem; /* Adjust headline size for mobile */
   }
-  
-  .location-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
+
+  .location-section p {
+    font-size: 1.3rem; /* Adjust paragraph size for mobile */
   }
-  
-  .location-info {
-    flex: 1 1 40%;
+
+  .google-map {
+    height: 300px; /* Adjust map size for mobile */
   }
-  
-  .location-info .section-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #15a84f;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+}
+
+/* Gallery Section */
+.gallery-section {
+  padding: 4rem 2rem 3rem; /* Default padding */
+  background-color: var(--secondary-green); /* 00A64F */
+  color: var(--white); /* White text for better visibility */
+  text-align: center;
+}
+
+.gallery-section .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-section h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 4rem; /* Larger font for emphasis */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--primary-yellow); /* FEEA2B */
+}
+
+.gallery-section p {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Slightly larger for readability */
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--white);
+}
+
+/* Slider */
+.gallery-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 280px; /* Default height for medium screens */
+}
+
+.gallery-slider .slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.gallery-slider img {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container */
+  object-position: center; /* Centers the image */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gallery-section h2 {
+    font-size: 3rem; /* Adjust headline size for mobile */
   }
-  
-  .location-info p {
-    font-size: 1.6rem;
-    line-height: 1.8;
-    letter-spacing: 1px;
-    font-weight: 500;
-    color: rgba(160, 174, 171, 1);
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+  .gallery-section p {
+    font-size: 1.3rem; /* Adjust paragraph size for mobile */
   }
-  
-  .location-info .btn {
-    display: inline-block;
-    background-color: #15a84f;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+
+  .gallery-slider {
+    height: 220px; /* Smaller height for phones */
   }
-  
-  .location-info .btn:hover {
-    background-color: rgba(122, 199, 185, 1);
+
+  .gallery-slider img {
+    object-fit: cover;
+    object-position: center;
   }
-  
-  .map-wrapper {
-    flex: 1 1 60%;
-    height: 450px; /* Taller height for the map container */
-    padding: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
+}
+
+/* Contact Us Section */
+.contact-us {
+  padding: 4rem 2rem;
+  background-color: var(--primary-yellow); /* FEEA2B */
+  color: var(--dark-black); /* Black text for better contrast */
+  text-align: center;
+}
+
+.contact-us .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-us h2 {
+  font-family: 'Baloo Bhaina 2', cursive; /* Playful and bold font */
+  font-size: 4rem; /* Larger headline */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px; /* Slightly more spacing */
+  color: var(--dark-black);
+}
+
+.contact-us p {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font */
+  font-size: 1.5rem; /* Slightly larger for readability */
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--dark-black);
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.social-icons .icon {
+  font-size: 2.5rem; /* Slightly larger icons for emphasis */
+  color: var(--dark-black); /* Black for default visibility */
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.social-icons .icon:hover {
+  color: var(--secondary-green); /* Highlight with green on hover */
+  transform: scale(1.2); /* Larger hover effect */
+}
+
+/* Icon Colors (Optional) */
+.icon.whatsapp {
+  color: #25D366; /* WhatsApp Green */
+}
+
+.icon.instagram {
+  color: #C13584; /* Instagram Pink */
+}
+
+.icon.tiktok {
+  color: #010101; /* TikTok Black */
+}
+
+/* Footer Note */
+.footer-note {
+  font-family: 'Patrick Hand', cursive; /* Handwritten font for a personal touch */
+  font-size: 1.2rem; /* Slightly larger for visibility */
+  color: rgba(0, 0, 0, 0.7); /* Subtle black for footer note */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-us h2 {
+    font-size: 3rem; /* Adjust headline size for mobile */
   }
-  
-  .location-section iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+
+  .contact-us p {
+    font-size: 1.3rem; /* Adjust paragraph size for mobile */
   }
-  
-  .map-container {
-    flex: 1 1 60%;
-    text-align: center;
+
+  .social-icons .icon {
+    font-size: 2rem; /* Adjust icon size for mobile */
   }
-  
-  .map-title {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #15a84f;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+
+  .footer-note {
+    font-size: 1rem; /* Adjust footer note size for mobile */
   }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .location-content {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .location-info {
-      flex: 1 1 100%;
-      padding: 10px 0;
-    }
-  
-    .map-wrapper {
-      flex: 1 1 100%;
-      height: 400px; /* Adjust height for smaller screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .location-section {
-      padding: 40px 15px;
-    }
-  
-    .location-info .section-title {
-      font-size: 2rem;
-      letter-spacing: 1.5px;
-    }
-  
-    .location-info p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      letter-spacing: 1px;
-    }
-  
-    .location-info .btn {
-      font-size: 1.0rem;
-      padding: 8px 16px;
-    }
-  
-    .map-wrapper {
-      height: 300px; /* Smaller height for mobile screens */
-    }
-  }
-  
-  
-  
-  /* ===== Footer Styling ===== */
-  footer {
-    background-color: #15a84f;
-    color: rgba(255, 254, 252, 1);
-    padding: 20px 15px; /* Reduced padding for a smaller footer */
-    text-align: center;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Ensures responsiveness */
-    align-items: center;
-    gap: 15px; /* Reduced gap for a more compact layout */
-  }
-  
-  /* Add font styles to contact-info and social-media headings */
-  .contact-info h2,
-  .social-media h2 {
-    font-size: 1.6rem; /* Slightly reduced font size */
-    margin-bottom: 10px; /* Reduced spacing below headings */
-    letter-spacing: 1px; /* Reduced spacing for a compact look */
-    text-transform: uppercase;
-    position: relative; /* Enables the outline effect */
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
-  }
-  
-  .contact-info h2::before,
-  .social-media h2::before {
-    content: attr(data-text); /* Adds the outline using the same text */
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent; /* Makes the outline invisible */
-    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.3); /* Creates a smaller outline effect */
-    z-index: -1; /* Ensures the outline is behind the main text */
-  }
-  
-  /* Add font styles to contact-info paragraphs */
-  .contact-info p {
-    margin: 5px 0; /* Reduced vertical spacing */
-    font-size: 1.1rem; /* Slightly smaller font size */
-    font-weight: bold; /* Retained bold styling */
-    position: relative; /* Enables the outline effect */
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
-  }
-  
-  .contact-info p::before {
-    content: attr(data-text); /* Adds the outline using the same text */
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent; /* Makes the outline invisible */
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3); /* Creates the outline effect */
-    z-index: -1; /* Ensures the outline is behind the main text */
-  }
-  
-  /* Add font styles to social media icons */
-  .social-media .social-icon {
-    font-size: 2.2rem; /* Slightly reduced icon size */
-    color: rgba(255, 254, 252, 1);
-    margin: 0 12px; /* Reduced spacing between icons */
-    transition: transform 0.3s, color 0.3s;
-    text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
-  }
-  
-  .social-media .social-icon:hover {
-    color: rgba(160, 174, 171, 1);
-    transform: scale(1.3); /* Retained scaling on hover */
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4); /* Enhances the shadow on hover */
-  }
-  
-  /* ===== Responsive Design ===== */
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column; /* Stacks the footer content */
-      text-align: center;
-    }
-  
-    .contact-info h2,
-    .social-media h2 {
-      font-size: 1.4rem; /* Reduced font size for smaller screens */
-      letter-spacing: 0.8px; /* Slightly reduced spacing */
-    }
-  
-    .contact-info p {
-      font-size: 1rem; /* Slightly smaller font size */
-    }
-  
-    .social-media .social-icon {
-      font-size: 2.5rem; /* Slightly smaller icon size */
-      margin: 0 10px; /* Adjusted spacing for smaller screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .contact-info h2,
-    .social-media h2 {
-      font-size: 1.2rem; /* Reduced font size for very small screens */
-      letter-spacing: 0.6px;
-    }
-  
-    .contact-info p {
-      font-size: 1rem; /* Reduced font size for very small screens */
-    }
-  
-    .social-media .social-icon {
-      font-size: 2.8rem; /* Reduced icon size further */
-      margin: 0 8px; /* Reduced spacing */
-    }
-  }
-  
-  
+}
+
+/* Section Divider */
+.section-divider {
+  height: 4px; /* Thin line */
+  width: 60%; /* Centered and slightly narrower */
+  margin: 2rem auto; /* Centered with spacing */
+  background: linear-gradient(to right, var(--primary-yellow), var(--secondary-green)); /* Gradient line */
+  border-radius: 50px; /* Smooth edges */
+  transition: transform 0.3s ease-in-out;
+}
+
+.section-divider:hover {
+  transform: scaleX(1.1); /* Subtle stretch effect on hover */
+}
+
